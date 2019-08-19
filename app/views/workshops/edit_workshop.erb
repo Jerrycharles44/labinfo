@@ -1,0 +1,18 @@
+<h1>Edit workshop information:</h1>
+<form method="post" action="/workshops/<%=@workshop.id%>" class="mui-form">
+<input id="hidden" type="hidden" name="_method" value="patch">
+<legend>Workshop name</legend>
+<input type="text" name="name" id="name" value="<%= @workshop.name%>"/>
+<legend>Workshop icon</legend>
+<input type="text" name="icon" id="icon" value="<%= @workshop.icon%>"/>
+<legend>Description</legend>
+<textarea name="description" id="description"><%= @workshop.description%></textarea>
+<h3>Difficulty level: </h3>
+<p>Easy<input type="range" name="level" id="level" min="1" max="3" step="1" 
+value="<%=@workshop.level.to_i+1%>"/>Advanced</p>       
+<p><button type="submit" class="mui-btn mui-btn--small mui-btn mui-btn--raised mui-btn--primary">Update Workshop</button>
+</form>
+<form method="post" action="/courses/<%=@workshop.id%>" class="mui-form">
+<input id="hidden" type="hidden" name="_method" value="delete">
+<button type="submit" class="mui-btn mui-btn--small mui-btn mui-btn--raised mui-btn--danger">Delete Workshop</button>
+</form>

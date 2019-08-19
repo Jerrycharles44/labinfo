@@ -1,0 +1,11 @@
+<h1>My enrollment list</h1>
+<ul><% @enrollments.each do |enrollment|%>
+<li>
+<h2><span class="mui--divider-right">Workshop name &nbsp;</span>
+<a href="/workshops/<%=enrollment.workshop_id%>"><%= find_workshop(enrollment.workshop_id).name%></a>
+<%= find_workshop(enrollment.workshop_id).icon%></h2>
+<h4><span class="mui--divider-right">Enrollment status &nbsp;</span>
+<%=registration_status(enrollment.confirmation)%> </h4>
+</li>
+<%end%></ul>
+<h3><a href="/update_enrollment">Update my enrollment</a></h3>

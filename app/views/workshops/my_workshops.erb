@@ -1,0 +1,17 @@
+<h1>My workshop list</h1>
+<ul><% @my_workshops.each do |workshop|%>
+<li>
+<h3><a href="/workshops/<%=workshop.id%>"><%= workshop.name%></a>
+<%= workshop.icon%></h3>
+<h4><span class="mui--divider-right">Description &nbsp;</span> <%= workshop.description%></h4>
+<h4><span class="mui--divider-right">Difficulty level &nbsp;</span> <%=workshop_difficulty(workshop.level)%></h4>
+</li>
+<%end%></ul>
+<h3><a href="/workshops/new">Create a new workshop</a></h3>
+<% if flash.has?(:error) %>
+<h3 class="error"><%= flash[:error] %></h3>
+<% elsif flash.has?(:deleted) %>
+<h3 class="deleted"><%= flash[:deleted] %></h3>
+<% elsif flash.has?(:message) %>
+<h3 class="message"><%= flash[:message] %></h3>
+<% end %>

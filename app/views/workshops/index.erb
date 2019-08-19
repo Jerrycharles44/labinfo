@@ -1,0 +1,22 @@
+<% if flash.has?(:error) %>
+<h3 class="error"><%= flash[:error] %></h3>
+<% end %>    
+<h1>All Workshops Available</h1>
+<ul><% @workshops.each do |workshop|%>
+<li>
+<h3>Workshop name: <a href="/workshops/<%=workshop.id%>"><%= workshop.name%> </a> <%= workshop.icon%></h3>            
+<p><span class="mui--divider-right">Workshop leader name &nbsp;</span>
+<%= workshop.workshop_leader.full_name %> </p>
+<p><span class="mui--divider-right">Description &nbsp;</span>
+<%= workshop.description %></p>
+<p><span class="mui--divider-right">Difficulty Level &nbsp;</span>    
+<%=workshop_difficulty(workshop.level) %></p>
+</li>          
+<%end%>
+</ul>
+<%# IF Student, show courses I'm enrolled %>
+<% if !current_user.workshop_leader %>
+<h3><a href="/enrolled">Click here for my enrolled workshops </a></h3>
+<% else %> <%# IF Instructor, show courses I teach%>
+<h3><a href="/teaching"><p>Click here for my workshops </a></h3>
+<% end %>

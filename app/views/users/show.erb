@@ -1,0 +1,21 @@
+<% if current_user == @user %>
+        <h1>My account information</h1>
+        <h3><span class="mui--divider-right">Full name &nbsp;</span> <%=@user.full_name%></h3>
+        <h3><span class="mui--divider-right">Email &nbsp;</span> <%=@user.email%></h3>
+        <h3>Biography: </h3>
+        <h4><%=@user.biography%></h4>
+        <h3><a href="/users/<%=current_user.id%>/edit">Update account information</a></h3>
+        <%#Flash message%>
+        <% if flash.has?(:error) %>
+        <h3 class="error"><%= flash[:error] %></h3>
+        <% elsif flash.has?(:message) %>
+        <h3 class="message"><%= flash[:message] %></h3>
+<% end %>
+<% else %>
+        <h1>User information</h1>
+        <h3><span class="mui--divider-right">Full name &nbsp;</span> <%=@user.full_name%></h3>
+        <h3><span class="mui--divider-right">Email &nbsp;</span> <%=@user.email%></h3>
+        <h3>Biography: </h3>
+        <h4><%=@user.biography%></h4>
+
+    <% end %>

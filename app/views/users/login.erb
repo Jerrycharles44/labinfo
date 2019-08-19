@@ -1,0 +1,15 @@
+<h1>Log in</h1>
+        <form method="post" action="/login" class="mui-form">
+            <input type="text" placeholder="Username" name="username" id="username" required/>
+            <input type="password" placeholder="Password" name="password" id="password" required/>
+            <button type="submit" class="mui-btn mui-btn--primary">Submit </button>
+        </form>
+
+        <% if flash.has?(:error) %>
+            <h3 class="error"><%= flash[:error] %></h3>
+        <% elsif flash.has?(:message) %>
+            <h3 class="message"><%= flash[:message] %></h3>
+            <h3><a href="/" style="text-decoration: underline;">Back to homepage</a><h3>
+        <% elsif flash.has?(:status) %>
+        <h3 class="message"><%= flash[:status] %></h3>
+        <% end %>

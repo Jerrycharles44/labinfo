@@ -1,0 +1,17 @@
+<%# IF instructor, show this page%>
+        <h1>Create a new workshop</h1>
+        <form method="post" action="/workshop" class="mui-form">
+            <legend>Workshop name</legend>
+                <input type="text" name="name" id="name" required/>
+            <legend>Workshop icon</legend>   
+                <input type="text" name="icon" id="icon" />
+            <legend>Description</legend>
+                <textarea name="description" id="description" required></textarea>
+            <legend>Difficulty level</legend>
+            <p>Easy<input type="range" name="level" id="level" min="1" max="3" step="1" />Advanced</p>
+            
+            <br><button type="submit" class="mui-btn mui-btn--primary">Create Workshop</button>
+        </form>
+        <% if flash.has?(:error) %>
+            <h3 class="error"><%= flash[:error] %></h3>
+        <% end %>

@@ -1,0 +1,76 @@
+<%#Flash message%>
+        <% if flash.has?(:error) %>
+            <h3 class="error"><%= flash[:error] %></h3>
+        <% elsif flash.has?(:message) %>
+            <h3 class="message"><%= flash[:message] %></h3>
+        <% end %>
+        
+        <h1>Workshop information</h1>
+
+            <span style='font-size: 5rem'><%= @workshop.icon%></span>
+            <h2><%= @workshop.name%> </h2>
+            <h4><span class="mui--divider-right">Description &nbsp;</span> <%= @workshop.description%></h4>
+            <h4><span class="mui--divider-right">Difficulty Level &nbsp;</span> <%=course_difficulty(@workshop.level) %></h4>
+         
+            <%# IF @user = instructor && owns course , show EDIT form %>
+            <%# Show registered students & status radio buttons%>
+        <% if current_user.workshop_leader && current_user.id === @workshop.workshop_leader.id%> 
+                <h3><a href="/workshops/<%=@workshop.id%>/edit"><p>Click here to edit workshop details </a></h3><br> 
+                <h2>Students Enrollment Status:</h2>
+                    <table class="mui-table mui-table--bordered">
+                        <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Student Name</th>
+                                <th>Enrollment Status</th>
+                                <th>Select: Waitlisted</th>
+                                <th>Select: Enrolled</th>
+                                <th>Confirm Change</th>
+                            </tr>
+                        </thead>
+                    <%@workshop_enrollment.each_with_index do |enrollment, index|%>
+                        <tbody>
+                            <tr>
+                                <form method="post" action="/workshops/<%=@workshop.id%>/enrollment" class="mui-form">
+                                    <td><%=index.to_i+1%></td>
+                                    <td><%=User.find_by_id(enrollment.user_id).full_name%> </td>
+                                    <td><%=registration_status(enrollment.confirmation)%> </td>
+                                    <td><input type="radio" name="confirmation" value="<%=enrollment.id%>_1"
+                                            <% if enrollment.confirmation == 1 %>
+                                                checked 
+                                            <%end%>> </td>
+                                    <td><input type="radio" name="confirmation" value="<%=enrollment.id%>_2"
+                                            <% if enrollment.confirmation == 2 %>
+                                                checked 
+                                            <%end%>></td>
+                                    <td><button type="submit" class="mui-btn mui-btn--fab mui-btn--primary">Save</button></td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    <%end%>
+                </table>
+
+            
+            <%# IF @user = instructor but DOES NOT own class, display message %>
+            <% elsif current_user.workshop_leader %>
+                <h3>You are not authorized to edit this workshop</h3>
+
+            <%# IF @user = student, show Enrollment status %>
+            <% elsif !current_user.workshop_leader %> 
+ 
+                    <% if @existing_registration %>
+                        <br><h3>Enrollment Status: <%=registration_status(@existing_registration.confirmation) %></h3>
+
+                        <h3><a href="/enrolled"><p>Click here for my enrolled workshops </a></h3>
+                    <%else%>
+                        <h3>Request to enroll in workshop</h3>
+                        
+                        <form method="post" action="/courses/<%=@course.id%>/registration" class="mui-form">
+
+                            <br><label>Request note to workshop leader:</label>
+                            <textarea name="notes" id="notes"></textarea>
+                            
+                            <p><button type="submit" class="mui-btn mui-btn--raised mui-btn--primary">Request</button>
+                        </form>
+                    <%end%>
+            <% end %>

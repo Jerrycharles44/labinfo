@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LabInfo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.muicss.com/mui-0.9.18/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <script src="//cdn.muicss.com/mui-0.9.18/js/mui.min.js"></script>
+    <style>
+      @import "bower_components/mui/src/sass/mui/colors";
+
+      body {
+        background-color: #eee;
+      }
+      body > .mui-container {
+        background-color: #fff;
+        min-height: 100vh;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
+      }
+      .mui-appbar {
+        background: #01579B;
+      }
+      .mui-appbar .brand {
+        line-height: 56px;
+        font-size: 3rem;
+      }
+
+      h3.error {
+        color: red;
+      }
+
+      h3.deleted {
+        color: red;
+      }
+
+      h3.message {
+        color: #0091EA;
+      }
+
+      h3.status {
+        color: #0091EA;
+      }
+
+    </style>
+  </head>
+
+
+  <body>
+    <div class="mui-appbar">
+      <div class="mui-container-fluid">
+        <div class="mui-col-md-10">
+          <div class="brand">LabInfo
+          </div>
+        </div>
+
+         <%# SHOW Dropdown menu only when user is logged in %>
+        <div class="mui-col-md-2">
+         <% if logged_in? %>
+            <div class="mui-dropdown">
+              <button class="mui-btn mui-btn--raised" data-mui-toggle="dropdown">
+                 ☰
+                <span class="mui-caret"></span>
+              </button>
+              <ul class="mui-dropdown__menu mui-dropdown__menu--right">
+                <li><a href="/users/<%=current_user.id%>/edit">Update my account</a></li>
+                <li><a href="/users">View users</a></li>
+                <li><a href="/workshops">View workshops</a></li>
+
+                <%# INSTRUCTOR menu links %>
+                <% if current_user.workshop_leader%>
+                  <li><a href="/workshops/new">Create new workshop</a></li>
+                  <li><a href="/teaching">My workshops</a></li>
+
+                <%# STUDENT menu links %>  
+                <%else%>
+                  <li><a href="/enrolled">My enrollment</a></li>
+                <%end%>
+                <li><a href="/logout">Log out</a></li>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+        
+      </div>
+    </div>
+
+
+    <div class="mui-container">
+      <%= yield %>
+    </div>
+  </body>
+</html>
