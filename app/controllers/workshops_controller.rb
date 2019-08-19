@@ -27,7 +27,7 @@ end
 
 # Instructor CREATE a new course
 post '/workshops' do
-    @new_workshop = Workshop.create(name: params[:name], icon: params[:icon], description: params[:description], level: params[:level].to_i-1, workshop_leader_id: session[:user_id])
+    @new_workshop = Workshop.create(name: params[:name], icon: params[:icon], description: params[:description], level: params[:level].to_i-1, workshop_learder_id: params[session[:user_id]])
 
     if @new_workshop.save 
         flash[:message] = "Workshop created"

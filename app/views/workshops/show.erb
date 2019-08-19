@@ -10,7 +10,7 @@
             <span style='font-size: 5rem'><%= @workshop.icon%></span>
             <h2><%= @workshop.name%> </h2>
             <h4><span class="mui--divider-right">Description &nbsp;</span> <%= @workshop.description%></h4>
-            <h4><span class="mui--divider-right">Difficulty Level &nbsp;</span> <%=course_difficulty(@workshop.level) %></h4>
+            <h4><span class="mui--divider-right">Difficulty Level &nbsp;</span> <%=workshop_difficulty(@workshop.level) %></h4>
          
             <%# IF @user = instructor && owns course , show EDIT form %>
             <%# Show registered students & status radio buttons%>
@@ -65,7 +65,7 @@
                     <%else%>
                         <h3>Request to enroll in workshop</h3>
                         
-                        <form method="post" action="/courses/<%=@course.id%>/registration" class="mui-form">
+                        <form method="post" action="/courses/<%=@workshop.id%>/registration" class="mui-form">
 
                             <br><label>Request note to workshop leader:</label>
                             <textarea name="notes" id="notes"></textarea>

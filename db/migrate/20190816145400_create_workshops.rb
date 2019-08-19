@@ -5,7 +5,7 @@ class CreateWorkshops < ActiveRecord::Migration
           t.string :description
           t.string :icon
           t.integer :level
-          t.integer :workshop_learder_id
+          t.integer :workshop_leader_id
         end
   end
 end

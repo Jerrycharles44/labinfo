@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20190816145419) do
     t.string  "description"
     t.string  "icon"
     t.integer "level"
-    t.integer "workshop_learder_id"
+    t.integer "workshop_leader_id"
   end
 
 end
