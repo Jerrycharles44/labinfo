@@ -27,7 +27,7 @@ end
 
 # Instructor CREATE a new course
 post '/workshops' do
-    @new_workshop = Workshop.create(name: params[:name], icon: params[:icon], description: params[:description], level: params[:level].to_i-1, workshop_learder_id: params[session[:user_id]])
+    @new_workshop = Workshop.create(name: params[:name], icon: params[:icon], description: params[:description], level: params[:level].to_i-1, workshop_leader_id: session[:user_id])
 
     if @new_workshop.save 
         flash[:message] = "Workshop created"
@@ -40,7 +40,7 @@ end
 
 # All users can view a single course page
 get '/workshops/:id' do
-    @workshop = find_workshpp(params[:id])
+    @workshop = find_workshop(params[:id])
     @workshop_enrollment = UserWorkshop.where(workshop_id: params[:id])
     @existing_registration = nil
 
@@ -118,7 +118,7 @@ end
 
 # Student can UPDATE course registration
 post '/workshops/:id/registration' do
-    @workshop = find_course(params[:id])
+    @workshop = find_workshop(params[:id])
     @new_enrollment = UserWorkshop.create(notes: params[:notes], user_id: current_user.id, workshop_id: params[:id])
     
     if @new_enrollment.save

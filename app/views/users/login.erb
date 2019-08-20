@@ -1,9 +1,35 @@
-<h1>Log in</h1>
-        <form method="post" action="/login" class="mui-form">
-            <input type="text" placeholder="Username" name="username" id="username" required/>
-            <input type="password" placeholder="Password" name="password" id="password" required/>
-            <button type="submit" class="mui-btn mui-btn--primary">Submit </button>
-        </form>
+      <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon 
+    <div class="fadeIn first">
+      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+    </div>
+-->
+    <!-- Login Form -->
+    <form method="post" action="/login" class="fadeIn second">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="text" name="username" class="form-control"placeholder="Enter username">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <input type="password" id="password" class="fadeIn third" name="password" placeholder="Password" required/>
+      <input type="submit" class="fadeIn fourth" value="Log in">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a class="underlineHover" href="#">Forgot Password?</a>
+    </div>
+
+  </div>
+</div>
 
         <% if flash.has?(:error) %>
             <h3 class="error"><%= flash[:error] %></h3>

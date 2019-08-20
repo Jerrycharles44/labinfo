@@ -149,7 +149,7 @@ class UsersController < ApplicationController
     get '/users/:id/edit' do 
         if logged_in?
             if current_user.id === params[:id].to_i
-                erb :"/users/edit"
+                erb :"users/edit"
             else
                 redirect to "/users/#{params[:id]}"
             end

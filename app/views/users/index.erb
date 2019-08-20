@@ -1,15 +1,25 @@
-<% if flash.has?(:error) %>
-<h3 class="error"><%= flash[:error] %></h3>
-<% end %>
-<h1>All Workshop leader Profiles</h1>
-<ul><% @workshop_leaders.each do |workshopLeader|%>
-<li>
-<h3><a href="/users/<%=workshop_leader.id%>"><%=workshop_leader.full_name%></a></h3>
-</li>
-<%end%></ul>
-<h1>All Student Profiles</h1>
-<ul><% @students.each do |student|%>
-<li>
-<h3><a href="/users/<%=student.id%>"><%=student.full_name%></a></h3>
-</li>
-<%end%></ul>
+
+<div class="mui-row">
+    <% if flash.has?(:error) %>
+        <h3 class="error"><%= flash[:error] %></h3>
+    <% end %>
+    <div class="mui-col-md-12">
+        <h1>All workshop leader Profiles</h1>
+
+        <ul><% @workshop_leaders.each do |workshop_leader|%>
+            <li>
+                <h3><a href="/users/<%=workshop_leader.id%>"><%=workshop_leader.full_name%></a></h3>
+            </li>
+        <%end%></ul>
+    </div>
+
+    <div class="mui-col-md-12 mui--divider-top">
+        <h1>All Student Profiles</h1>
+
+        <ul><% @students.each do |student|%>
+            <li>
+                <h3><a href="/users/<%=student.id%>"><%=student.full_name%></a></h3>
+            </li>
+        <%end%></ul>
+    </div>
+</div>

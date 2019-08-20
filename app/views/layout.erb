@@ -5,91 +5,79 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="//cdn.muicss.com/mui-0.9.18/css/mui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.9.18/js/mui.min.js"></script>
+    <link href="stylesheets/main.css" rel="stylesheet" type="text/css" />
+
     <style>
-      @import "bower_components/mui/src/sass/mui/colors";
-
       body {
-        background-color: #eee;
-      }
-      body > .mui-container {
-        background-color: #fff;
-        min-height: 100vh;
-        border-left: 1px solid #ddd;
-        border-right: 1px solid #ddd;
-        box-shadow: 0 0 10px 0px rgba(0, 0, 0, 0.1);
-      }
-      .mui-appbar {
-        background: #01579B;
-      }
-      .mui-appbar .brand {
-        line-height: 56px;
-        font-size: 3rem;
-      }
-
-      h3.error {
-        color: red;
-      }
-
-      h3.deleted {
-        color: red;
-      }
-
-      h3.message {
-        color: #0091EA;
-      }
-
-      h3.status {
-        color: #0091EA;
-      }
-
+      background: url("/images/labinfo.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 90vh;
+    }
     </style>
   </head>
 
+  <body class="body" style="padding:100px;">
+    <div style="height:700px; background-color:rgba(255,255,255,0.8);">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-  <body>
-    <div class="mui-appbar">
-      <div class="mui-container-fluid">
-        <div class="mui-col-md-10">
-          <div class="brand">LabInfo
-          </div>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav mr-auto">
+<% if logged_in? %>
+          <li class="nav-item">
+            <a class="nav-link" href="/users/<%=current_user.id%>/edit">Update my account</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/users">View users</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/workshops">View workshops</a>
+          </li>
 
-         <%# SHOW Dropdown menu only when user is logged in %>
-        <div class="mui-col-md-2">
-         <% if logged_in? %>
-            <div class="mui-dropdown">
-              <button class="mui-btn mui-btn--raised" data-mui-toggle="dropdown">
-                 ☰
-                <span class="mui-caret"></span>
-              </button>
-              <ul class="mui-dropdown__menu mui-dropdown__menu--right">
-                <li><a href="/users/<%=current_user.id%>/edit">Update my account</a></li>
-                <li><a href="/users">View users</a></li>
-                <li><a href="/workshops">View workshops</a></li>
-
-                <%# INSTRUCTOR menu links %>
-                <% if current_user.workshop_leader%>
-                  <li><a href="/workshops/new">Create new workshop</a></li>
-                  <li><a href="/teaching">My workshops</a></li>
-
-                <%# STUDENT menu links %>  
-                <%else%>
-                  <li><a href="/enrolled">My enrollment</a></li>
-                <%end%>
-                <li><a href="/logout">Log out</a></li>
-              </ul>
-            </div>
+<% if current_user.workshop_leader%>
+          <li class="nav-item">
+            <a class="nav-link" href="/workshops/new">Create new workshop</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/teaching">My workshops</a>
+          </li>
+<%else%>
+          <li class="nav-item">
+            <a class="nav-link" href="/enrolled">My enrollment</a>
+          </li>
+<%end%>
+<% end %>
+        </ul>
+        <div>
+        <% if !(logged_in?) %>
+            <a href="/login" type="button" class="btn btn-primary">Login</a>
+            <a href="/signup" type="button" class="btn btn-primary">Signup</a>
+          <% else %>
+          <a href="/logout" type="button" class="btn btn-info btn-sm">Logout</a>
           <% end %>
         </div>
-        
       </div>
-    </div>
+    </nav>
+      <div class="mui-container">
+        <%= yield %>
+      </div>
+      </div>
 
 
-    <div class="mui-container">
-      <%= yield %>
-    </div>
+      <!-- Footer -->
+<footer class="page-footer font-small blue">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">©LabInfo 2019 Copyright:
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
   </body>
 </html>
